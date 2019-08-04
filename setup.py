@@ -55,12 +55,12 @@ class PrebuildCommand(Command):
             shutil.copy(os.path.join(tmpdir, 'coins.json'), os.path.join(CWD, 'trezorlib', 'coins.json'))
 
         # regenerate messages
-        try:
-            subprocess.check_call([os.path.join(CWD, 'tools', 'build_protobuf'), '--no-core'])
-        except Exception as e:
-            print(e)
-            print("Generating protobuf failed. Maybe you don't have 'protoc', or maybe you are on Windows?")
-            print("Using pre-generated files.")
+        #try:
+        #    subprocess.check_call([os.path.join(CWD, 'tools', 'build_protobuf'), '--no-core'])
+        #except Exception as e:
+        #    print(e)
+        #    print("Generating protobuf failed. Maybe you don't have 'protoc', or maybe you are on Windows?")
+        print("Using pre-generated protobuf files.")
 
 
 def _patch_prebuild(cls):
