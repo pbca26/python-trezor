@@ -855,6 +855,8 @@ class ProtocolMixin(object):
                 msg.version = current_tx.version
                 msg.lock_time = current_tx.lock_time
                 msg.inputs_cnt = len(current_tx.inputs)
+                msg.version_group_id = current_tx.version_group_id
+                msg.branch_id = current_tx.branch_id
                 if res.details.tx_hash:
                     msg.outputs_cnt = len(current_tx.bin_outputs)
                 else:
@@ -902,7 +904,8 @@ class ProtocolMixin(object):
             elif res.request_type == proto.RequestType.TXEXTRADATA:
                 o, l = res.details.extra_data_offset, res.details.extra_data_len
                 msg = proto.TransactionType()
-                msg.extra_data = current_tx.extra_data[o:o + l]
+                # TODO: joinsplit extra_data
+                msg.extra_data = b'\x00' #current_tx.extra_data[o:o + l]
                 res = self.call(proto.TxAck(tx=msg))
                 continue
 
